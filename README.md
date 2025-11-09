@@ -43,13 +43,23 @@ This will:
 
 ## Direction Fields (Slope Fields)
 
-Visualizes direction fields (slope fields) with solution curves overlaid.
+Visualizes direction fields (slope fields) with solution curves overlaid for two different ODEs side by side.
 
-### Equation Visualized
+### Equations Visualized
 
-**dx/dt = 1 - sin(x)**
+#### 1. **dx/dt = 1 - sin(x)**
+- Autonomous ODE with periodic equilibria at x = π/2 + 2πn
+- Semi-stable equilibrium points
+- Three solution curves with initial conditions: x(0) = 1.8, x(0) = π/2, and x(0) = -4.5
 
-The script creates a direction field showing the behavior of the differential equation across a 2D space, then overlays three solution curves with different initial conditions.
+#### 2. **dy/dt = y(y - 2)(y + 1)**
+- Cubic autonomous ODE with three equilibrium points
+- **Equilibria**: y = -1 (unstable), y = 0 (stable), y = 2 (unstable)
+- Four solution curves demonstrating stability behavior:
+  - y(0) = -1.2: Below y = -1, escapes to -∞
+  - y(0) = -0.5: Between -1 and 0, converges to 0
+  - y(0) = 1: Between 0 and 2, converges to 0
+  - y(0) = 2.2: Above y = 2, escapes to +∞
 
 ### Requirements
 
@@ -65,14 +75,17 @@ python direction_field.py
 ```
 
 This will display:
-- **Direction field arrows**: Show the slope at each point in the (t, x) plane
-- **Solution curves**: Three trajectories starting from x(0) = 1.8, x(0) = π/2, and x(0) = -4.5
+- **Two side-by-side plots**: One for each differential equation
+- **Direction field arrows**: Show the slope at each point in the (t, x/y) plane
+- **Solution curves**: Numerical integration using `odeint` showing how solutions evolve over time
+- **Equilibrium lines**: Dashed gray lines marking equilibrium points (second plot)
 
 ### Key Concepts
 
 - **Direction field**: Normalized arrows showing the direction of solutions at grid points
-- **Solution curves**: Numerical integration using `odeint` to show how solutions evolve over time
-- The arrows are normalized to equal length to show direction only (not magnitude)
+- **Equilibrium points**: Where dy/dt = 0 (solutions remain constant)
+- **Stability**: Stable equilibria attract nearby solutions; unstable equilibria repel them
+- **Sensitive dependence**: Near y = 2, small changes in initial conditions lead to drastically different long-term behavior
 
 
 
