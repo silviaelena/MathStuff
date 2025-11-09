@@ -87,5 +87,43 @@ This will display:
 - **Stability**: Stable equilibria attract nearby solutions; unstable equilibria repel them
 - **Sensitive dependence**: Near y = 2, small changes in initial conditions lead to drastically different long-term behavior
 
+### Picard-Lindelöf Theorem (Existence and Uniqueness)
+
+The **Picard-Lindelöf theorem** is a fundamental result that guarantees the existence and uniqueness of solutions to initial value problems.
+
+#### Theorem Statement
+
+For a differential equation of the form:
+
+```
+dy/dt = f(t, y),  with initial condition y(t₀) = y₀
+```
+
+If the function **f(t, y)** is:
+1. **Continuous** in a region containing (t₀, y₀)
+2. **Lipschitz continuous** in y (i.e., |f(t, y₁) - f(t, y₂)| ≤ K|y₁ - y₂| for some constant K)
+
+Then there exists:
+- A **unique solution** y(t) that satisfies the initial value problem
+- The solution exists in some interval around t₀
+
+#### Consequences
+
+**Why Solution Curves Never Intersect:**
+
+If two different solution curves intersected at point (t*, y*), then both curves would pass through the same point with the same value. This would mean two different solutions exist for the initial condition y(t*) = y*, which contradicts uniqueness.
+
+**Exception:** Equilibrium points (constant solutions) are special cases where y(t) = c for all t. Solutions can approach equilibria asymptotically as t → ∞, but never reach them in finite time.
+
+#### Visual Evidence
+
+In the direction field plots:
+- Each arrow at point (t, y) shows the **unique direction** of the solution passing through that point
+- Solution curves follow these arrows and cannot cross each other
+- This creates a deterministic "flow" in the phase space
+- Initial conditions completely determine the future behavior of solutions
+
+This theorem is the mathematical foundation that makes differential equations **predictable and deterministic**.
+
 
 
