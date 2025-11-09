@@ -39,4 +39,40 @@ This will:
 3. **Numerical evaluation**: Converts symbolic solutions to numerical data
 4. **Visualization**: Plots all solutions using matplotlib
 
+---
+
+## Direction Fields (Slope Fields)
+
+Visualizes direction fields (slope fields) with solution curves overlaid.
+
+### Equation Visualized
+
+**dx/dt = 1 - sin(x)**
+
+The script creates a direction field showing the behavior of the differential equation across a 2D space, then overlays three solution curves with different initial conditions.
+
+### Requirements
+
+```bash
+pip install scipy numpy matplotlib
+```
+
+### Usage
+
+```bash
+cd differential-equations
+python direction_field.py
+```
+
+This will display:
+- **Direction field arrows**: Show the slope at each point in the (t, x) plane
+- **Solution curves**: Three trajectories starting from x(0) = 1.8, x(0) = π/2, and x(0) = -4.5
+
+### Key Concepts
+
+- **Direction field**: Normalized arrows showing the direction of solutions at grid points
+- **Solution curves**: Numerical integration using `odeint` to show how solutions evolve over time
+- The arrows are normalized to equal length to show direction only (not magnitude)
+
+
 
