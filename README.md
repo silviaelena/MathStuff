@@ -282,4 +282,142 @@ In machine learning:
 
 **This is literally visualizing what happens inside neural networks during training!**
 
+---
+
+## Principal Component Analysis (PCA) - Week 1
+
+### Week 1: Mean, Covariance, and Affine Transformations
+
+An in-depth exploration of foundational statistical concepts for machine learning, focusing on how datasets behave under transformations.
+
+#### Learning Objectives
+
+1. **Computational Skills**: Implement statistical functions using vectorized NumPy operations
+2. **Statistical Understanding**: Master mean and covariance computation for datasets
+3. **Transformation Theory**: Understand how affine transformations affect dataset statistics
+4. **Testing Discipline**: Develop robust testing practices for ML implementations
+
+#### Key Concepts Covered
+
+##### 1. **Mean Vector**
+
+The mean represents the center (centroid) of your dataset in feature space.
+
+$$
+\boldsymbol{\mu} = \frac{1}{N} \sum_{i=1}^{N} \mathbf{x}_i
+$$
+
+**Implementation Lessons:**
+- **Naive approach**: Loop over each data point (slow in Python)
+- **Vectorized approach**: `np.mean(X, axis=0)` — dramatically faster
+- **Speedup**: ~100-1000× faster on typical datasets
+
+##### 2. **Covariance Matrix**
+
+The covariance matrix $\boldsymbol{\Sigma}$ encodes both individual feature variances and pairwise correlations.
+
+$$
+\boldsymbol{\Sigma} = \frac{1}{N} (\mathbf{X} - \boldsymbol{\mu})^T (\mathbf{X} - \boldsymbol{\mu})
+$$
+
+**Key Properties:**
+- **Symmetric**: $\Sigma_{ij} = \Sigma_{ji}$
+- **Positive semi-definite**: All eigenvalues $\geq 0$
+- **Diagonal elements**: Variances of individual features
+- **Off-diagonal elements**: Covariances between feature pairs
+
+**Implementation Lessons:**
+- **Naive approach**: Triple nested loop over N×D×D (extremely slow)
+- **Vectorized approach**: Matrix multiplication `(X_centered.T @ X_centered) / N`
+- **Critical insight**: Center data first, then use one matrix operation
+
+##### 3. **Affine Transformations**
+
+Understanding how statistics transform under $\mathbf{Y} = \mathbf{X} \mathbf{A}^T + \mathbf{b}$
+
+**Transformation Rules:**
+
+Mean transformation:
+$$
+\boldsymbol{\mu}_{\text{new}} = \mathbf{A} \boldsymbol{\mu} + \mathbf{b}
+$$
+
+Covariance transformation:
+$$
+\boldsymbol{\Sigma}_{\text{new}} = \mathbf{A} \boldsymbol{\Sigma} \mathbf{A}^T
+$$
+
+**Critical Insights:**
+- Translation $\mathbf{b}$ **only affects the mean**, not the covariance
+- Linear transformation $\mathbf{A}$ affects **both mean and covariance**
+- Covariance describes the **shape** of data, independent of location
+- These rules enable computing statistics without explicitly transforming data
+
+#### Practical Applications
+
+**Dataset Used:**
+- **Olivetti Faces Dataset**: 400 face images (64×64 pixels = 4096 dimensions)
+- Demonstrates high-dimensional data analysis
+- Visualizes "mean face" as the dataset centroid
+
+**Real-World Relevance:**
+
+1. **Feature Normalization**: Standardizing data to have zero mean and unit variance
+2. **Whitening Transformations**: Making features uncorrelated and equal variance
+3. **PCA Foundation**: Understanding how covariance eigenvalues reveal data structure
+4. **Federated Learning**: Computing distributed statistics without sharing raw data
+5. **Data Augmentation**: Predicting statistics after transformations (rotation, scaling)
+
+#### Why Vectorization Matters
+
+**Benchmark Results (1000×20 dataset):**
+```
+mean_naive():  ~50ms  (Python loop)
+mean():        ~0.5ms (NumPy vectorized) → 100× speedup
+
+cov_naive():   ~500ms  (Triple Python loop)
+cov():         ~2ms    (Matrix multiplication) → 250× speedup
+```
+
+**Key Lesson:** In ML, loops are enemies. Matrix operations leverage optimized BLAS libraries and enable GPU acceleration.
+
+#### Testing Philosophy
+
+Every function includes:
+- **Multiple test cases**: Edge cases, zero covariance, identity matrices
+- **Numerical tolerance**: Using `np.testing.assert_allclose` with `rtol=1e-5`
+- **Verification**: Applying transformations twice and checking consistency
+
+**Critical principle:** In ML, silent errors are catastrophic. Test everything.
+
+#### Files and Resources
+
+- **`week1.ipynb`**: Interactive Jupyter notebook with complete implementation
+- **`week1_conclusions_mean_covariance_affine.md`**: Comprehensive theoretical guide with examples
+- **Dataset**: Olivetti faces (400 grayscale 64×64 images)
+
+#### Mathematical Foundations for PCA
+
+This week establishes the groundwork for Principal Component Analysis:
+
+- **Next step**: Eigendecomposition of $\boldsymbol{\Sigma}$ reveals principal components
+- **Eigenvectors**: Directions of maximum variance
+- **Eigenvalues**: Amount of variance along each direction
+- **Dimensionality reduction**: Project onto top-k eigenvectors
+
+**The Core Insight:**
+
+> Understanding how covariance transforms under linear operations is the foundation for understanding PCA, whitening, and essentially all linear methods in machine learning.
+
+#### Geometric Interpretation
+
+- **Mean** $\boldsymbol{\mu}$ → Center of the data cloud
+- **Covariance** $\boldsymbol{\Sigma}$ → Shape and orientation of the ellipsoidal data distribution
+- **Eigenvectors** → Principal axes of the ellipsoid
+- **Eigenvalues** → Spread along those axes
+
+**Visual Analogy:** Your data is an elliptical cloud in high-dimensional space. The mean is the center, and the covariance matrix encodes the exact shape, tilt, and stretch of that cloud.
+
+---
+
 
