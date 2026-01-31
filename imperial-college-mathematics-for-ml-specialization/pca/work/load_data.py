@@ -12,3 +12,24 @@ def load_mnist(data_home='.'):
         "DESCR": "mldata.org dataset: mnist-original",
     }
     return mnist
+
+
+import numpy as np
+
+# Example sequences
+X = np.array([
+    [1, 2, 3],
+    [2, 3, 4],
+    [3, 4, 5],
+    [4, 5, 6]
+])
+
+y = np.array([4, 5, 6, 7])
+
+# Reshape for LSTM: (samples, timesteps, features)
+print(X)
+print(X.shape)
+print(X.shape[0])
+print(X.shape[1])
+X = X.reshape((X.shape[0], X.shape[1], 1))
+print(X)
