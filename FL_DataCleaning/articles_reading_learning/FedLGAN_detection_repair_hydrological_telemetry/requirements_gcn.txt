@@ -1,0 +1,9 @@
+# Requirements for GCN Complete Example
+# Install with: pip install -r requirements_gcn.txt
+
+numpy>=1.21.0
+matplotlib>=3.4.0
+networkx>=2.6.0
+torch>=1.10.0
+scikit-learn>=0.24.0
+
